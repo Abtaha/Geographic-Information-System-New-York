@@ -10,4 +10,5 @@ This repo contains a GIS for New York.
 ..* Scipy
 ..* Numpy
 
-Shapefiles for New York **Download Link: **[http://download.geofabrik.de/north-america/us/new-york-latest-free.shp.zip]
+#### Shapefiles for New York 
+**Download Link:** [http://download.geofabrik.de/north-america/us/new-york-latest-free.shp.zip]
