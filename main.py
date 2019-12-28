@@ -27,7 +27,7 @@ def getMap():
 
 
 mapData = getMap()
-mapData.plot(cmap="viridis", linewidth=0.1)
+mapData.plot(linewidth=0.1)
 
 weatherData = []
 weatherData.append([pd.read_csv("weather data\\USW00094728.csv"), [40.7789,-73.9692]])
