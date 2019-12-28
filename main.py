@@ -3,12 +3,26 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.interpolate import griddata
+from matplotlib.lines import Line2D
 import os
 
 
 def getMap():
-    file = os.getcwd() + "\\new york data\\gis_osm_roads_free_1.shp"
-    gdf = gpd.read_file(file)
+    filesDir = os.getcwd() + "\\new york data\\"
+
+    files = []
+    for i in os.listdir(filesDir):
+        if i.endswith('.shp'):
+            files.append(os.path.join(filesDir, i))
+
+    data = []
+    for filename in files:
+        file = filename.split("\\")[-1]
+        if (file == "gis_osm_roads_free_1.shp" or file == "gis_osm_waterways_free_1.shp" 
+            or file == "gis_osm_railways_free_1"):
+            data.append(gpd.read_file(filename))
+
+    gdf = pd.concat(data, sort=True)
     return gdf
 
 
@@ -23,9 +37,7 @@ weatherData.append([pd.read_csv("weather data\\USW00014768.csv"), [43.1167,-77.6
 
 x = [data[1][1] for data in weatherData]
 y = [data[1][0] for data in weatherData]
-#plt.plot(x, y, 'ro')
 
-#####
 
 def getTemp(points, weatherData):
     temp = []
@@ -52,4 +64,9 @@ values = getTemp(points, weatherData)
 interpolated = griddata(points, values, (grid_x, grid_y), method='nearest')
 plt.imshow(interpolated.T, extent=(-80, -71, 40, 45), origin='lower', cmap="hot")
 
+cmap = plt.cm.hot
+custom_lines = [Line2D([0], [0], color=cmap(0.0), lw=4),
+                Line2D([0], [0], color=cmap(0.5), lw=4),
+                Line2D([0], [0], color=cmap(1.0), lw=4)]
+plt.legend(custom_lines, ['Cold', 'Mild', 'Hot'])
 plt.show()
