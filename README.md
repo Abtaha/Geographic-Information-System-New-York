@@ -13,4 +13,4 @@ This repo contains a GIS for New York.
 ### Shapefiles for New York 
 **Download Link:** [http://download.geofabrik.de/north-america/us/new-york-latest-free.shp.zip]
 
-Extract it to a folder called `new york data`
+Extract it to a folder and name it `new york data`
